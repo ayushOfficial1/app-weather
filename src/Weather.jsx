@@ -142,7 +142,7 @@ const Weather = () => {
   const handleTemp = async () => {
     try {
       const res = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=6ca2ddc62cbf309560f6d8acd0be775f`
+        `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=1&appid=6ca2ddc62cbf309560f6d8acd0be775f`
       );
       if (res.data[0] === undefined) {
         alert("Can't find the City");
