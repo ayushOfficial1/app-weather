@@ -177,6 +177,7 @@ const WeatherHome = () => {
           setwind(result.data.wind.speed);
           setDesc(result.data.weather[0].main);
           let temp = result.data.weather[0].main;
+          if(temp==="mist") temp = "haze";
           temp = temp.toLowerCase();
           setbgimg(images[temp]);
      
