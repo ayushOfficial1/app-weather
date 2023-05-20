@@ -2,8 +2,22 @@ import styled from "styled-components";
 import Clock from "./Clock";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import images from "./data.js";
 import { mobile } from "./responsive";
+import day from "./images/day_bg.jpg";
+import clear from "./images/clear.jpg";
+import haze from "./images/haze.jpg";
+import snow from "./images/snow.jpg";
+import rain from "./images/rain.jpg";
+import clouds from "./images/clouds.jpg";
+
+const images = {
+  day: day,
+  clear: clear,
+  haze: haze,
+  snow: snow,
+  rain: rain,
+  clouds: clouds,
+};
 
 const Container = styled.div`
   height: 100vh;
@@ -13,7 +27,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffeeee;
-  background-image: url(${images.day});
+  background-image: url(${day});
   background-size: cover;
 `;
 const MainContainer = styled.div`
@@ -26,7 +40,8 @@ const MainContainer = styled.div`
   border-radius: 20px;
   background-color: #ffffff;
 
-  background-image: ${(props) => `url(${images[props.backgroundImage]})`};
+  /* background-image: ${(props) => `url(${images[props.backgroundImage]})`}; */
+  background-image: ${(props) => `url(${props.backgroundImage})`};
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -109,6 +124,7 @@ const List = styled.ul`
 const Item = styled.li`
   margin: 5px auto;
   font-size: 18px;
+  font-weight: 600;
 `;
 const ClockContainer = styled.div`
   width: 70%;
@@ -124,20 +140,22 @@ const Info = styled.span`
   margin-top: 20px;
   font-size: 25px;
   font-weight: 800;
-  color: white;
+  color: black;
   ${mobile({
     fontWeight: "500",
     fontSize: "20px",
+    color: "white",
   })}
 `;
 
-const Weather = () => {
+const WeatherHome = () => {
   const [city, setCity] = useState("");
   const [temp, setTemp] = useState();
   const [feel, setFeel] = useState();
   const [humidity, setHumidity] = useState();
   const [wind, setwind] = useState();
   const [desc, setDesc] = useState();
+  const [bgimg, setbgimg] = useState();
 
   const handleTemp = async () => {
     try {
@@ -158,7 +176,10 @@ const Weather = () => {
           setFeel(result.data.main.feels_like);
           setwind(result.data.wind.speed);
           setDesc(result.data.weather[0].main);
-          console.log(result.data);
+          let temp = result.data.weather[0].main;
+          temp = temp.toLowerCase();
+          setbgimg(images[temp]);
+     
         }
       }
     } catch (error) {
@@ -171,12 +192,12 @@ const Weather = () => {
   };
 
   useEffect(() => {
-    console.log(city);
+    // console.log(city);
   }, [city]);
 
   return (
     <Container>
-      <MainContainer backgroundImage={desc ? desc.toLowerCase() : "day"}>
+      <MainContainer backgroundImage={bgimg}>
         <SearchContainer>
           <Input
             placeholder="Search Here"
@@ -202,4 +223,4 @@ const Weather = () => {
   );
 };
 
-export default Weather;
+export default WeatherHome;

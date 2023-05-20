@@ -1,10 +1,10 @@
 import React from "react";
-import Weather from "./Weather";
+import WeatherHome from "./WeatherHome";
 
 function App() {
   return (
     <>
-      <Weather />
+      <WeatherHome />
     </>
   );
 }
