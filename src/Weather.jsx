@@ -31,7 +31,7 @@ const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
+  justify-content: center;
 
   ${mobile({
     height: "60%",
@@ -40,14 +40,13 @@ const MainContainer = styled.div`
 `;
 
 const SearchContainer = styled.div`
-
   margin: 5px auto;
   width: 60%;
   border: none;
   display: flex;
   flex: 1;
   ${mobile({
-    width: "50%",   
+    width: "50%",
   })}
 `;
 
@@ -64,7 +63,7 @@ const Input = styled.input`
   background-color: #fff9f9;
 
   ${mobile({
-    fontSize:'12px'
+    fontSize: "12px",
   })}
 `;
 
@@ -127,8 +126,8 @@ const Info = styled.span`
   font-weight: 800;
   color: white;
   ${mobile({
-    fontWeight:"500",
-    fontSize:"20px"
+    fontWeight: "500",
+    fontSize: "20px",
   })}
 `;
 
@@ -169,7 +168,6 @@ const Weather = () => {
 
   const handleKeyPress = (e) => {
     if (e.key === "Enter") handleTemp();
-    console.log(process.env.REACT_APP_KEY);
   };
 
   useEffect(() => {
@@ -178,7 +176,7 @@ const Weather = () => {
 
   return (
     <Container>
-      <MainContainer backgroundImage={desc.toLowerCase()}>
+      <MainContainer backgroundImage={desc ? desc.toLowerCase() : "day"}>
         <SearchContainer>
           <Input
             placeholder="Search Here"
