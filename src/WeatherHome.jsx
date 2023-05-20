@@ -14,6 +14,7 @@ const images = {
   day: day,
   clear: clear,
   haze: haze,
+  mist: haze,
   snow: snow,
   rain: rain,
   clouds: clouds,
@@ -176,10 +177,10 @@ const WeatherHome = () => {
           setFeel(result.data.main.feels_like);
           setwind(result.data.wind.speed);
           setDesc(result.data.weather[0].main);
-          let temp = result.data.weather[0].main;
-          if(temp==="mist") temp = "haze";
-          temp = temp.toLowerCase();
-          setbgimg(images[temp]);
+          // let temp = result.data.weather[0].main.toLowerCase();
+          // if(temp==="mist") temp = "haze";
+          // temp = temp.toLowerCase();
+          setbgimg(images[result.data.weather[0].main.toLowerCase()]);
      
         }
       }
